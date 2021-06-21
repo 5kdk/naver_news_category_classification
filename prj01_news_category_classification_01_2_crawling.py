@@ -14,17 +14,17 @@ driver = webdriver.Chrome('../chromedriver', options=options)
 driver.implicitly_wait(10)
 
 category = ['Politics', 'Economic', 'Social', 'Culture', 'World', 'IT']
-page_num = [334, 423, 400, 87, 128, 74]
+page_num = [334, 423, 400, 87, 128, 74] # 카테고리 별 기사페이지 리스트
 df_title = pd.DataFrame() #빈 데이터프레임
 for l in range(0, 6):
     df_section_title = pd.DataFrame()
-    for k in range(1, 422):
+    for k in range(1, 423):
         url = "https://news.naver.com/main/main.nhn?mode=LSD&mid=shm&sid1=10{}#&date=%2000:00:00&page={}".format(l, k)
         driver.get(url)
         time.sleep(0.5)
         title_list = [] #빈 리스트 생성
-        for j in range(1, 5): #X path로 확인한 요소 1~5
-            for i in range(1, 6):
+        for j in range(1, 5): #X path로 확인한 요소 1~4
+            for i in range(1, 6): #X path 확인한 li 요소 1~5
                 try:
                     title = driver.find_element_by_xpath(
                         '//*[@id="section_body"]/ul[{}]/li[{}]/dl/dt[2]/a'.format(j, i)
